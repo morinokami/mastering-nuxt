@@ -18,6 +18,8 @@
     {{ home.reviewValue }}<br />
     {{ home.guests }} guests, {{ home.bedrooms }} rooms, {{ home.beds }} beds,
     {{ home.bathrooms }} bath<br />
+    {{ home.description }}
+    <div style="height: 800px; width: 800px" ref="map"></div>
   </div>
 </template>
 
@@ -34,6 +36,14 @@ export default {
     return {
       home: {},
     };
+  },
+  methods: {},
+  mounted() {
+    this.$maps.showMap(
+      this.$refs.map,
+      this.home._geoloc.lat,
+      this.home._geoloc.lng
+    );
   },
   created() {
     const home = homes.find((home) => home.objectID === this.$route.params.id);
